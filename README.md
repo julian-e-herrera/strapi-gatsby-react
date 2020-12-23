@@ -1,2 +1,2 @@
 # strapi-gatsby-react
-##view react-gatsby-graphql-datocms.netlify.app
+##view https://react-gatsby-graphql-datocms.netlify.app/
