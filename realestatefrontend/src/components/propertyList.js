@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from "react"
 import { css } from "@emotion/core"
-//import styled from "@emotion/styled"
+import listPropCSS from "../css/listProp.module.css"
 import useProperties from "../hooks/use-properties"
 import PropertyPreview from "./propertyPreview"
-
+import useFilter from "../hooks/use-filter"
 const PropertyList = () => {
   const data = useProperties()
-  const [properties, saveProperties] = useState([])
+  const [properties] = useState(data)
+  const [filtered, saveFiltered] = useState([])
+
+  const { category, FilterUI } = useFilter()
 
   useEffect(() => {
-    saveProperties(data)
-  }, [data])
+    if (category) {
+      const filtProp = properties.filter(
+        prop => prop.category.name === category
+      )
+      saveFiltered(filtProp)
+    } else {
+      saveFiltered(properties)
+    }
+  }, [category, properties])
 
   return (
     <>
@@ -19,10 +29,11 @@ const PropertyList = () => {
           margin-top: 5rem;
         `}
       >
-        our properties
+        Our properties
       </h2>
-      <ul>
-        {properties.map(property => (
+      {FilterUI()}
+      <ul className={listPropCSS.properties}>
+        {filtered.map(property => (
           <PropertyPreview key={property.id} property={property} />
         ))}
       </ul>

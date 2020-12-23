@@ -37,6 +37,7 @@ const useProperties = () => {
     bathrooms: prop.bathrooms,
     price: prop.price,
     garage: prop.garage,
+    rooms: prop.rooms,
     category: prop.category,
     id: prop.id,
     agents: prop.agents,
